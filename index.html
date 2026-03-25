@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Horror Mega Hub – Stream 100+ free public-domain horror movies." />
+  <meta name="theme-color" content="#0a0000" />
+  <title>Horror Mega Hub</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Oswald:wght@300;400;600&family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="blood-drips" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <header class="navbar" role="banner">
+    <div class="nav-inner">
+      <a href="#" class="logo" aria-label="Horror Mega Hub home">
+        <span class="logo-icon">☠</span>
+        <span class="logo-text">Horror<em>Mega</em>Hub</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#section-classics">Classics</a>
+        <a href="#section-zombies">Zombies</a>
+        <a href="#section-monsters">Monsters</a>
+        <a href="#section-supernatural">Supernatural</a>
+        <a href="#section-scifi">Sci-Fi Horror</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="#section-classics">Classics</a>
+      <a href="#section-zombies">Zombies</a>
+      <a href="#section-monsters">Monsters</a>
+      <a href="#section-supernatural">Supernatural</a>
+      <a href="#section-scifi">Sci-Fi Horror</a>
+    </div>
+  </header>
+
+  <section class="hero" aria-label="Hero banner">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-tag">100+ Free Horror Films</p>
+      <h1 class="hero-title">Enter If You <span>Dare</span></h1>
+      <p class="hero-sub">The ultimate vault of public-domain horror. No subscription. No cost. Just fear.</p>
+      <a href="#movie-grid" class="btn-hero">Browse the Vault</a>
+    </div>
+  </section>
+
+  <section class="controls-bar" aria-label="Search and filter">
+    <div class="controls-inner">
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="searchInput" placeholder="Search movies…" aria-label="Search movies" autocomplete="off" />
+      </div>
+      <div class="filter-chips" role="group" aria-label="Filter by category">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="classics">Classics</button>
+        <button class="chip" data-filter="zombies">Zombies</button>
+        <button class="chip" data-filter="monsters">Monsters</button>
+        <button class="chip" data-filter="supernatural">Supernatural</button>
+        <button class="chip" data-filter="scifi">Sci-Fi</button>
+        <button class="chip" data-filter="slasher">Slasher</button>
+        <button class="chip" data-filter="gothic">Gothic</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-bar" aria-live="polite" id="statsBar">Loading movies…</div>
+
+  <main id="movie-grid" class="grid-sections" role="main">
+    <section id="section-classics" class="movie-section" data-section="classics">
+      <h2 class="section-title"><span>👁</span> Classic Horror</h2>
+      <div class="movie-grid" id="grid-classics"></div>
+    </section>
+    <section id="section-zombies" class="movie-section" data-section="zombies">
+      <h2 class="section-title"><span>🧟</span> Zombie Terror</h2>
+      <div class="movie-grid" id="grid-zombies"></div>
+    </section>
+    <section id="section-monsters" class="movie-section" data-section="monsters">
+      <h2 class="section-title"><span>👹</span> Monsters &amp; Creatures</h2>
+      <div class="movie-grid" id="grid-monsters"></div>
+    </section>
+    <section id="section-supernatural" class="movie-section" data-section="supernatural">
+      <h2 class="section-title"><span>👻</span> Supernatural</h2>
+      <div class="movie-grid" id="grid-supernatural"></div>
+    </section>
+    <section id="section-scifi" class="movie-section" data-section="scifi">
+      <h2 class="section-title"><span>🛸</span> Sci-Fi Horror</h2>
+      <div class="movie-grid" id="grid-scifi"></div>
+    </section>
+    <section id="section-slasher" class="movie-section" data-section="slasher">
+      <h2 class="section-title"><span>🔪</span> Slasher &amp; Psycho</h2>
+      <div class="movie-grid" id="grid-slasher"></div>
+    </section>
+    <section id="section-gothic" class="movie-section" data-section="gothic">
+      <h2 class="section-title"><span>🦇</span> Gothic Horror</h2>
+      <div class="movie-grid" id="grid-gothic"></div>
+    </section>
+    <div id="emptyState" class="empty-state" hidden>
+      <p>💀 No movies found matching your search.</p>
+      <button onclick="clearSearch()">Clear Search</button>
+    </div>
+  </main>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="modalTitle">Movie Title</h2>
+        <button class="modal-close" id="modalClose" aria-label="Close player">✕</button>
+      </div>
+      <div class="modal-player">
+        <iframe id="movieIframe" src="" frameborder="0" allowfullscreen allow="autoplay; fullscreen" title="Movie player" loading="lazy"></iframe>
+      </div>
+      <p class="modal-source">Source: Internet Archive (Public Domain)</p>
+    </div>
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">☠</button>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-logo"><span class="logo-icon">☠</span> HorrorMegaHub</div>
+      <p class="footer-copy">
+        All movies are in the <strong>public domain</strong> or freely licensed.<br />
+        Streamed via <a href="https://archive.org" target="_blank" rel="noopener">Internet Archive</a> &amp; other open sources.
+      </p>
+      <p class="footer-legal">© 2024 Horror Mega Hub. No copyright infringement intended.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
